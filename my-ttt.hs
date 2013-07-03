@@ -1,7 +1,7 @@
 type Board = String
 
 test :: Board
-test = "123456789"
+test = "012345678"
 
 showBoard :: Board -> String
 showBoard b =
@@ -9,6 +9,14 @@ showBoard b =
   b !! 3 : [] ++ "_|_" ++ b !! 4 : [] ++ "_|_" ++ b !! 5 : [] ++ "\n" ++ 
   b !! 6 : [] ++ " | " ++ b !! 7 : [] ++ " | " ++ b !! 8 : []
 
+  --Given a board a player and a position, returns a
+  --new board with a move applied.
+move :: Board -> Char -> Int -> Board
+move (p:b) ch pos
+  | pos > 0 = p:[] ++ (move b ch (pos - 1))
+  | otherwise = ch:[] ++ b
+
+-- Checks if the board has a winning player
 winningBoard :: Board -> Char
 winningBoard b
   --Horizontal lines
